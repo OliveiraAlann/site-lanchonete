@@ -4,7 +4,7 @@
 ## 🚀 Demonstração (GitHub Pages)
 🔗 **Acesse o protótipo online:**  
 ➡️ *Coloque aqui o link do GitHub Pages quando publicar*  
-`https://seuusuario.github.io/nome-do-repo/`
+https://oliveiraalann.github.io/site-lanchonete/`
 
 ## 📝 Sobre o Projeto
 Este repositório contém um **projeto piloto** desenvolvido para solucionar um problema real da universidade:  
