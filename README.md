@@ -42,7 +42,7 @@ Este piloto foi criado com o objetivo de ser apresentado aos donos da lanchonete
 
 ## 📸 Screenshots
 
-📸 ./img/Img-piloto.png
+📸 ![Protótipo](./img/Img-piloto.png)
 
 
 ## 🌐 Como usar
