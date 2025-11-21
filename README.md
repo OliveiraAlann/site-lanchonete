@@ -41,9 +41,9 @@ Este piloto foi criado com o objetivo de ser apresentado aos donos da lanchonete
 ✔️ Apresentar um piloto funcional  
 
 ## 📸 Screenshots
-```
+
 📸 ./img/Img-piloto.png
-```
+
 
 ## 🌐 Como usar
 1. Acesse o link do GitHub Pages.
