@@ -27,7 +27,7 @@ Este piloto foi criado com o objetivo de ser apresentado aos donos da lanchonete
 ## 📂 Estrutura do Projeto
 ```
 📁 pasta-do-projeto
-├── Site-lanchonete.html
+├── index.html
 ├── img/
     └── Img-piloto.png
 
