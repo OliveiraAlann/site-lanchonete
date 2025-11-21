@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fast-Food XYZ</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+      color: #f58220;
+    }
+
+    .menu,
+    .pedido,
+    .finalizar {
+      padding: 20px;
+      background-color: #f8f8f8;
+      border-radius: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      transition: transform 0.3s;
+    }
+
+    .menu:hover,
+    .pedido:hover,
+    .finalizar:hover {
+      transform: translateY(-5px);
+    }
+
+    .menu button,
+    .pedido button,
+    .finalizar button {
+      display: block;
+      width: 100%;
+      padding: 15px 0;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      color: #fff;
+      background-color: #f58220;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 20px;
+      outline: none;
+    }
+
+    .menu button:hover,
+    .pedido button:hover,
+    .finalizar button:hover {
+      background-color: #e76e00;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 20px;
+    }
+
+    .pedido-lista {
+      margin-top: 20px;
+    }
+
+    .total {
+      font-weight: bold;
+      text-align: right;
+      color: #333;
+      font-size: 20px;
+    }
+
+    .nome-item {
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #333;
+      font-size: 16px;
+    }
+
+    .icon {
+      margin-right: 10px;
+      color: #f58220;
+    }
+
+    .menu,
+    .pedido,
+    .finalizar {
+      border: 2px solid #f58220;
+    }
+
+    .menu button,
+    .pedido button,
+    .finalizar button {
+      background-color: transparent;
+      color: #f58220;
+      border: 2px solid #f58220;
+      border-radius: 30px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .menu button:hover,
+    .pedido button:hover,
+    .finalizar button:hover {
+      background-color: #f58220;
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Bem-vindo ao Fast-Food XYZ!</h1>
+    <div id="menu" class="menu">
+      <h2>Menu</h2>
+      <button onclick="showMenu('lanches')"><i class="fas fa-hamburger icon"></i>Lanches</button>
+      <button onclick="showMenu('batataFrita')"><i class="fas fa-french-fries icon"></i>Batata Frita</button>
+      <button onclick="showMenu('bebidas')"><i class="fas fa-cocktail icon"></i>Bebidas</button>
+    </div>
+    <div id="pedido" class="pedido">
+      <h2>Pedido</h2>
+      <ul id="pedido-lista"></ul>
+      <p id="total">Total do Pedido: R$ 0.00</p>
+      <button onclick="limparPedido()">Limpar Pedido</button>
+    </div>
+    <div class="finalizar">
+      <h2>Finalizar</h2>
+      <button onclick="voltarMenu()">Voltar</button>
+      <button onclick="finalizarPedido()">Finalizar Pedido</button>
+    </div>
+  </div>
+  <script>
+    let pedido = [];
+    let totalPedido = 0.0;
+    let menuAnterior = '';
+
+    function showMenu(categoria) {
+      let menuItens = {
+        lanches: [
+          {descricao: "Hamburger", preco: 17.99},
+          {descricao: "Cheeseburger", preco: 12.50}
+        ],
+        batataFrita: [
+          {descricao: "Pequena", preco: 6.50},
+          {descricao: "Média", preco: 9.50},
+          {descricao: "Grande", preco: 15.0}
+        ],
+        bebidas: [
+          {descricao: "Suco", preco: 8.0},
+          {descricao: "Coca-cola", preco: 5.0}
+        ]
+      };
+
+      menuAnterior = document.getElementById("menu").innerHTML;
+
+      let menu = menuItens[categoria];
+      let menuHtml = "<ul>";
+      menu.forEach(item => {
+        menuHtml += `<li><span class="nome-item">${item.descricao}</span> - R$ ${item.preco.toFixed(2)} <button onclick="adicionarPedido('${item.descricao}', ${item.preco})">Adicionar</button></li>`;
+      });
+      menuHtml += "</ul>";
+      document.getElementById("menu").innerHTML = menuHtml;
+    }
+
+    function adicionarPedido(descricao, preco) {
+      pedido.push({descricao, preco});
+      totalPedido += preco;
+      updatePedido();
+    }
+
+    function updatePedido() {
+      let pedidoHtml = "<ul>";
+      pedido.forEach((item, index) => {
+        pedidoHtml += `<li>Item ${index + 1}: ${item.descricao} - R$ ${item.preco.toFixed(2)}</li>`;
+      });
+      pedidoHtml += "</ul>";
+      document.getElementById("pedido-lista").innerHTML = pedidoHtml;
+      document.getElementById("total").innerText = `Total do Pedido: R$ ${totalPedido.toFixed(2)}`;
+    }
+
+    function finalizarPedido() {
+      alert(`Pedido finalizado. Total: R$ ${totalPedido.toFixed(2)}`);
+      pedido = [];
+      totalPedido = 0.0;
+      updatePedido();
+      showMenu("lanches");
+    }
+
+    function limparPedido() {
+      pedido = [];
+      totalPedido = 0.0;
+      updatePedido();
+    }
+
+    function voltarMenu() {
+      document.getElementById("menu").innerHTML = menuAnterior;
+    }
+  </script>
+</body>
+
+</html>
