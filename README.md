@@ -27,9 +27,9 @@ Este piloto foi criado com o objetivo de ser apresentado aos donos da lanchonete
 ## 📂 Estrutura do Projeto
 ```
 📁 pasta-do-projeto
-├── index.html ou Site-lanchonete.html
+├── Site-lanchonete.html
 ├── img/
-│   └── Img-piloto.png
+    └── Img-piloto.png
 
 ```
 
@@ -42,7 +42,7 @@ Este piloto foi criado com o objetivo de ser apresentado aos donos da lanchonete
 
 ## 📸 Screenshots
 
-📸 ![Protótipo](./img/Img-piloto.png)
+ ![Protótipo](./img/Img-piloto.png)
 
 
 ## 🌐 Como usar
